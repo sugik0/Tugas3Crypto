@@ -98,7 +98,6 @@ const route = useRoute();
 const coin = ref(null);
 const loading = ref(false);
 
-// Fungsi pembantu untuk memformat angka (contoh: 1000000 -> 1,000,000)
 const formatNumber = (num) => {
   if (!num) return '-';
   return parseFloat(num).toLocaleString('en-US');
@@ -107,9 +106,7 @@ const formatNumber = (num) => {
 const fetchCoinDetail = async () => {
   loading.value = true;
   try {
-    // API Coinlore untuk satu koin menggunakan ticker/?id=
     const response = await axios.get(`https://api.coinlore.net/api/ticker/?id=${route.params.id}`);
-    // Endpoint ini mengembalikan array, jadi kita ambil index [0]
     coin.value = response.data[0]; 
   } catch (error) {
     console.error("Gagal memuat detail:", error);
@@ -125,7 +122,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Variabel CSS & Background */
 .main-content {
   --background: #f4f6f9;
 }
@@ -136,7 +132,6 @@ onMounted(() => {
   color: #1f2937;
 }
 
-/* Detail Header */
 .detail-header {
   display: flex;
   flex-direction: column;
@@ -175,7 +170,6 @@ onMounted(() => {
   color: #10b981;
 }
 
-/* Info Card */
 .info-card {
   background: #ffffff;
   border-radius: 16px;
@@ -210,7 +204,6 @@ onMounted(() => {
   margin: 8px 0;
 }
 
-/* Dynamic Colors for Trends */
 .text-green {
   color: #10b981;
 }
@@ -219,7 +212,6 @@ onMounted(() => {
   color: #ef4444;
 }
 
-/* Loading State */
 .loading-state {
   display: flex;
   flex-direction: column;
@@ -244,7 +236,6 @@ onMounted(() => {
   100% { transform: rotate(360deg); }
 }
 
-/* ======= DUKUNGAN TEMA GELAP (DARK MODE) ======= */
 @media (prefers-color-scheme: dark) {
   .main-content {
     --background: #111827;

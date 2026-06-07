@@ -57,7 +57,6 @@
 </template>
 
 <script setup>
-// 1. Tambahkan onMounted dan onUnmounted dari 'vue'
 import { ref, computed, onMounted, onUnmounted } from 'vue'; 
 import { useRouter } from 'vue-router';
 import { 
@@ -105,7 +104,6 @@ const handleRefresh = (event) => {
 };
 
 const startAutoRefresh = () => {
-  // Cegah interval ganda jika dipanggil berkali-kali
   if (refreshInterval) return; 
   refreshInterval = setInterval(() => {
     fetchData(null, true); 
@@ -128,28 +126,20 @@ const filteredCoins = computed(() => {
   );
 });
 
-// ==========================================
-// PENYELESAIAN BUG HMR VITE + IONIC ROUTER
-// ==========================================
-
-// Bekerja sangat baik saat HMR (Save di VS Code) dan saat aplikasi pertama kali dibuka
 onMounted(() => {
   if (coins.value.length === 0) fetchData();
   startAutoRefresh();
 });
 
-// Membersihkan memori saat HMR me-reload komponen
 onUnmounted(() => {
   stopAutoRefresh();
 });
 
-// Melanjutkan auto-refresh saat kembali dari DetailPage (Navigasi Ionic)
 onIonViewWillEnter(() => {
   if (coins.value.length > 0) fetchData(null, true);
   startAutoRefresh();
 });
 
-// Menghentikan auto-refresh saat pergi ke DetailPage agar kuota internet hemat
 onIonViewDidLeave(() => {
   stopAutoRefresh();
 });
@@ -157,7 +147,6 @@ onIonViewDidLeave(() => {
 </script>
 
 <style scoped>
-/* Latar Belakang Area Konten */
 .main-content {
   --background: #f4f6f9;
 }
@@ -185,10 +174,8 @@ onIonViewDidLeave(() => {
   border-bottom-left-radius: 28px;
   border-bottom-right-radius: 28px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02);
-  /* margin-bottom dihapus agar lebih rapat dengan search bar */
 }
 
-/* === SEARCH BAR STYLE === */
 .search-container {
   padding: 10px 10px 0px;
 }
@@ -233,7 +220,6 @@ onIonViewDidLeave(() => {
 
 .empty-state { text-align: center; color: #6b7280; padding: 40px 20px; font-weight: 500; }
 
-/* === TEMA GELAP === */
 @media (prefers-color-scheme: dark) {
   .main-content { --background: #111827; }
   .main-toolbar, .dashboard-panel { --background: #1f2937; background: #1f2937; }
