@@ -1,8 +1,8 @@
 <template>
   <ion-page>
-    <ion-header class="ion-no-border">
+<ion-header class="ion-no-border">
       <ion-toolbar>
-        <ion-buttons slot="start">
+        <ion-buttons :slot="start">
           <ion-back-button default-href="/home" text="Kembali"></ion-back-button>
         </ion-buttons>
         <ion-title class="header-title">Detail Koin</ion-title>
